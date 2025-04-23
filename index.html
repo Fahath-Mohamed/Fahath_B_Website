@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed_Fahath_B (E22MER059) - Web Technology</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --header-height: 80px;
+            --footer-height: 60px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: var(--dark-color);
+            position: sticky;
+            top: var(--header-height);
+            z-index: 999;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: var(--primary-color);
+        }
+
+        nav ul li a.active {
+            background-color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: calc(var(--header-height) + 20px) auto 40px;
+            padding: 0 20px;
+            min-height: calc(100vh - var(--header-height) - var(--footer-height) - 60px);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+
+        h2 {
+            color: var(--dark-color);
+            margin: 1.5rem 0 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .topic-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .topic-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .topic-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .topic-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .link-list a {
+            display: block;
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .link-list a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .contact-info {
+            background: var(--light-color);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            height: var(--footer-height);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li a {
+                padding: 0.8rem 1rem;
+                text-align: center;
+            }
+
+            .topic-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Mohamed_Fahath_B (E22MER059)</div>
+        <div class="subtitle">Web Technology</div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+            <li><a href="#" class="nav-link" data-page="syllabus">Syllabus</a></li>
+            <li><a href="#" class="nav-link" data-page="theory">Theory Notes</a></li>
+            <li><a href="#" class="nav-link" data-page="lab">Lab Manuals</a></li>
+            <li><a href="#" class="nav-link" data-page="referral">Referral</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <h1>Welcome to Web Technology</h1>
+            
+            <div class="card">
+                <h2>What is Web Technology?</h2>
+                <p>Web technology refers to the various tools and techniques utilized in the process of communication between different types of devices over the internet. It encompasses markup languages, programming interfaces, and protocols used to develop and deliver web applications and services.</p>
+                <p>At its core, web technology enables the creation of websites and web applications that can be accessed through web browsers. It includes both front-end technologies (what users see and interact with) and back-end technologies (server-side processing and database management).</p>
+            </div>
+
+            <div class="card">
+                <h2>Why Learn Web Technology?</h2>
+                <p>Learning web technology is essential in today's digital world for several reasons:</p>
+                <ul>
+                    <li><strong>High Demand:</strong> Web developers are in constant demand across industries.</li>
+                    <li><strong>Career Opportunities:</strong> Offers diverse career paths from front-end to full-stack development.</li>
+                    <li><strong>Creativity & Problem-Solving:</strong> Combines technical skills with creative design.</li>
+                    <li><strong>Entrepreneurial Potential:</strong> Enables you to build your own websites and applications.</li>
+                    <li><strong>Continuous Evolution:</strong> The field is always growing with new technologies.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Where is Web Technology Used?</h2>
+                <p>Web technology powers virtually every aspect of our online experience:</p>
+                <div class="topic-list">
+                    <div class="topic-item">
+                        <h3>E-Commerce</h3>
+                        <p>Online shopping platforms like Amazon, eBay, and Shopify rely heavily on web technologies.</p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>Social Media</h3>
+                        <p>Platforms like Facebook, Twitter, and Instagram are built using advanced web technologies.</p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>Web Applications</h3>
+                        <p>Google Docs, Trello, and Slack are examples of powerful web applications.</p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>Content Management</h3>
+                        <p>WordPress, Drupal, and other CMS platforms help manage digital content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <h2>Contact Us</h2>
+                <p><strong>EGSPEC Student</strong></p>
+                <p>Department B.E_Mech</p>
+                <p>Nagapattinam</p>
+                <p>+91 9994648938</p>
+            </div>
+        </div>
+
+        <!-- Syllabus Page -->
+        <div id="syllabus" class="page">
+            <h1>Web Technology Syllabus</h1>
+            
+            <div class="card">
+                <h2>HTML Syllabus</h2>
+                <ul>
+                    <li>Introduction to HTML</li>
+                    <li>HTML Document Structure</li>
+                    <li>HTML Elements and Tags</li>
+                    <li>Text Formatting</li>
+                    <li>Lists, Tables, and Forms</li>
+                    <li>HTML5 Semantic Elements</li>
+                    <li>Multimedia (Audio, Video)</li>
+                    <li>Canvas and SVG</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>CSS Syllabus</h2>
+                <ul>
+                    <li>Introduction to CSS</li>
+                    <li>CSS Syntax and Selectors</li>
+                    <li>Box Model</li>
+                    <li>CSS Layouts (Flexbox, Grid)</li>
+                    <li>Responsive Design</li>
+                    <li>Transforms and Transitions</li>
+                    <li>Animations</li>
+                    <li>CSS Preprocessors (SASS)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Perl Syllabus</h2>
+                <ul>
+                    <li>Introduction to Perl</li>
+                    <li>Scalars, Arrays, Hashes</li>
+                    <li>Operators and Control Structures</li>
+                    <li>Subroutines</li>
+                    <li>Regular Expressions</li>
+                    <li>File Handling</li>
+                    <li>CGI Programming with Perl</li>
+                    <li>Database Connectivity</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>PHP Syllabus</h2>
+                <ul>
+                    <li>Introduction to PHP</li>
+                    <li>PHP Syntax and Variables</li>
+                    <li>Control Structures</li>
+                    <li>Functions</li>
+                    <li>Arrays</li>
+                    <li>Forms Handling</li>
+                    <li>File Handling</li>
+                    <li>PHP and MySQL</li>
+                    <li>Object-Oriented PHP</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>MySQL Syllabus</h2>
+                <ul>
+                    <li>Introduction to Databases</li>
+                    <li>MySQL Basics</li>
+                    <li>Creating Databases and Tables</li>
+                    <li>SQL Queries (SELECT, INSERT, UPDATE, DELETE)</li>
+                    <li>Joins and Subqueries</li>
+                    <li>Indexes and Constraints</li>
+                    <li>Stored Procedures and Functions</li>
+                    <li>Database Security</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Theory Notes Page -->
+        <div id="theory" class="page">
+            <h1>Theory Notes</h1>
+            
+            <div class="card">
+                <h2>Local Host Materials</h2>
+                <p>This section contains theory notes available on your local server. Please ensure you are connected to the local network to access these resources.</p>
+                
+                <div class="topic-list">
+                    <div class="topic-item">
+                        <h3>HTML Basics</h3>
+                        <p>Introduction to HTML tags, elements, and document structure.</p>
+                        <p><em>Path:1-Introduction to HTML..pdf</em></p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>CSS Fundamentals</h3>
+                        <p>Understanding selectors, properties, and the box model.</p>
+                        <p><em>Path:CSS Notes.pdf</em></p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>JavaScript Essentials</h3>
+                        <p>Variables, functions, and DOM manipulation basics.</p>
+                        <p><em>Path:JS Notes.pdf</em></p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>PHP Programming</h3>
+                        <p>Server-side scripting with PHP syntax and examples.</p>
+                        <p><em>Path:1-Introduction to PHP programming.pdf</em></p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>Database Concepts</h3>
+                        <p>Relational databases and SQL queries introduction.</p>
+                        <p><em>Path:MySQL Notes for Professionals.pdff</em></p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>Web Security</h3>
+                        <p>Common vulnerabilities and secure coding practices.</p>
+                        <p><em>Path: /materials/web_security.pdf</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lab Manuals Page -->
+        <div id="lab" class="page">
+            <h1>Lab Manuals</h1>
+            
+            <div class="card">
+                <h2>Local Host Lab Materials</h2>
+                <p>This section contains practical lab manuals and exercises available on your local server. Connect to the local network to access these resources.</p>
+                
+                <div class="topic-list">
+                    <div class="topic-item">
+                        <h3>Lab 1: HTML Basics</h3>
+                        <p>Creating your first webpage with HTML5.</p>
+                        <p><em>Path:handouts_lab.pdf</em></p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>Lab 2: CSS Styling</h3>
+                        <p>Implementing layouts and responsive design.</p>
+                        <p><em>Path:lab6winter-styles.pdf</em></p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>Lab 3: JavaScript</h3>
+                        <p>DOM manipulation and event handling.</p>
+                        <p><em>Path:Lab8.pdf</em></p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>Lab 4: PHP Forms</h3>
+                        <p>Processing form data with PHP.</p>
+                        <p><em>Path:7MCE3P1-Programming In PHP Lab.pdf</em></p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>Lab 5: MySQL</h3>
+                        <p>Database creation and CRUD operations.</p>
+                        <p><em>Path:DBMSLab-3.pdf</em></p>
+                    </div>
+                    <div class="topic-item">
+                        <h3>Lab 6: Final Project</h3>
+                        <p>Building a complete web application.</p>
+                        <p><em>Path:Web_Design_MANUAL-min.pdf</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Referral Page -->
+        <div id="referral" class="page">
+            <h1>Web Technology Resources</h1>
+            
+            <div class="card">
+                <h2>20 Useful Web Technology Links</h2>
+                <div class="link-list">
+                    <a href="https://developer.mozilla.org" target="_blank">MDN Web Docs (Mozilla Developer Network)</a>
+                    <a href="https://www.w3schools.com" target="_blank">W3Schools - Web Development Tutorials</a>
+                    <a href="https://stackoverflow.com" target="_blank">Stack Overflow - Developer Q&A</a>
+                    <a href="https://css-tricks.com" target="_blank">CSS-Tricks - CSS and Front-end Development</a>
+                    <a href="https://www.freecodecamp.org" target="_blank">freeCodeCamp - Learn to Code</a>
+                    <a href="https://web.dev" target="_blank">web.dev - Google's Web Fundamentals</a>
+                    <a href="https://www.codecademy.com" target="_blank">Codecademy - Interactive Coding Lessons</a>
+                    <a href="https://www.smashingmagazine.com" target="_blank">Smashing Magazine - For Web Designers</a>
+                    <a href="https://www.udemy.com" target="_blank">Udemy - Online Courses</a>
+                    <a href="https://www.coursera.org" target="_blank">Coursera - Online Learning</a>
+                    <a href="https://www.html5rocks.com" target="_blank">HTML5 Rocks - HTML5 Resources</a>
+                    <a href="https://www.php.net" target="_blank">PHP Official Documentation</a>
+                    <a href="https://dev.mysql.com" target="_blank">MySQL Official Documentation</a>
+                    <a href="https://www.perl.org" target="_blank">Perl Official Website</a>
+                    <a href="https://www.javascript.info" target="_blank">Modern JavaScript Tutorial</a>
+                    <a href="https://www.git-scm.com" target="_blank">Git - Version Control System</a>
+                    <a href="https://github.com" target="_blank">GitHub - Code Hosting Platform</a>
+                    <a href="https://www.codepen.io" target="_blank">CodePen - Front-end Developer Playground</a>
+                    <a href="https://www.webplatform.org" target="_blank">WebPlatform.org - Web Standards</a>
+                    <a href="https://www.alistapart.com" target="_blank">A List Apart - Web Design Articles</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Additional Learning Resources</h2>
+                <div class="link-list">
+                    <a href="https://www.youtube.com/user/TechGuyWeb" target="_blank">Traversy Media (YouTube)</a>
+                    <a href="https://www.youtube.com/user/learncodeacademy" target="_blank">LearnCode.academy (YouTube)</a>
+                    <a href="https://www.youtube.com/user/TheCharmefis" target="_blank">Kevin Powell (CSS YouTube)</a>
+                    <a href="https://www.youtube.com/user/Computerphile" target="_blank">Computerphile (Tech YouTube)</a>
+                    <a href="https://www.reddit.com/r/webdev/" target="_blank">WebDev Subreddit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Mohamed_Fahath_B (E22MER059) - Web Technology. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation functionality
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and pages
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Show corresponding page
+                    const pageId = this.getAttribute('data-page');
+                    document.getElementById(pageId).classList.add('active');
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Set current year in footer
+            document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} Mohamed_Fahath_B (E22MER059) - Web Technology. All rights reserved.`;
+        });
+    </script>
+</body>
+</html>
